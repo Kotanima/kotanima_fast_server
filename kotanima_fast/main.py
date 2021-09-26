@@ -6,14 +6,14 @@ from database import (
     async_set_selected_status,
 )
 from fastapi.staticfiles import StaticFiles
+import os
 
+load_dotenv(find_dotenv(raise_error_if_not_found=True))
 
 app = FastAPI()
 app.mount(
     "/static",
-    StaticFiles(
-        directory="/home/neo/development/kotanima_project/kotanima_content/static/"
-    ),
+    StaticFiles(directory=os.getenv("STATIC_FOLDER_PATH")),
     name="static",
 )
 
