@@ -25,7 +25,7 @@ async def async_get_posts_for_review(limit: int = 20) -> list:
                 WHERE mav.phash is null
                 AND (mar.phash NOT IN (SELECT DISTINCT phash FROM my_app_redditpost where       is_disliked=true))
                 AND (mar.sub_name IN ('awwnime','fantasymoe','patchuu','awenime','moescape'))
-                AND mar.is_downloaded=false
+                AND mar.is_downloaded=true
                 AND mar.is_checked=false
                 AND mar.is_disliked=false
                 AND mar.is_selected=false
