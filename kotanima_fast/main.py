@@ -1,12 +1,14 @@
+import os
+
+from dotenv import find_dotenv, load_dotenv
 from fastapi import FastAPI, Query
+from fastapi.staticfiles import StaticFiles
 
 from database import (
     async_get_posts_for_review,
     async_set_dislike_status,
     async_set_selected_status,
 )
-from fastapi.staticfiles import StaticFiles
-import os
 
 load_dotenv(find_dotenv(raise_error_if_not_found=True))
 
@@ -17,8 +19,7 @@ app.mount(
     name="static",
 )
 
-# hypercorn --keyfile key.pem --certfile cert.pem --bind "0.0.0.0:8000" kotanima_fast/main:app --reload
-
+# hypercorn --keyfile key.pem --certfile cert.pem --bind "0.0.0.0:8000" -w 3 kotanima_fast/main:app --reload
 # openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -days 999 -nodes
 
 
