@@ -5,11 +5,19 @@ from database import (
     async_set_dislike_status,
     async_set_selected_status,
 )
+from fastapi.staticfiles import StaticFiles
 
 
 app = FastAPI()
+app.mount(
+    "/static",
+    StaticFiles(
+        directory="/home/neo/development/kotanima_project/kotanima_content/static/"
+    ),
+    name="static",
+)
 
-# hypercorn --keyfile key.pem --certfile cert.pem kotanima_fast/main:app --reload
+# hypercorn --keyfile key.pem --certfile cert.pem --bind "0.0.0.0:8000" kotanima_fast/main:app --reload
 
 # openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -days 999 -nodes
 
