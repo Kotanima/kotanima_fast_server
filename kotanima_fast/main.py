@@ -1,6 +1,3 @@
-
-from typing import List
-
 from fastapi import FastAPI, Query
 
 from database import (
