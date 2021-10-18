@@ -19,7 +19,7 @@ async def async_get_posts_for_review(limit: int = 20) -> list:
     async with await psycopg.AsyncConnection.connect(get_connection_string()) as aconn:
         async with aconn.cursor(row_factory=dict_row) as acur:
             await acur.execute(
-                """select mar.sub_name, mar.post_id, mar.is_checked, mar.phash
+                """select distinct on (mar.phash) mar.sub_name, mar.post_id, mar.is_checked, mar.phash
                 from my_app_redditpost mar 
                 left join my_app_vkpost mav on mar.phash=mav.phash 
                 WHERE mav.phash is null

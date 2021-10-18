@@ -20,7 +20,11 @@ app.mount(
 )
 
 # hypercorn --keyfile key.pem --certfile cert.pem --bind "0.0.0.0:8000" -w 3 kotanima_fast/main:app --reload
+# hypercorn --keyfile kaa.key --certfile kaa.crt --bind "0.0.0.0:8000" -w 3 kotanima_fast/main:app --reload
 # openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -days 999 -nodes
+
+# sudo nano /etc/systemd/system/hypercorn.service
+# sudo systemctl restart hypercorn.socket
 
 
 @app.get("/reddit_posts/")
